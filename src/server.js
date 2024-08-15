@@ -5,20 +5,25 @@ require('dotenv').config();
 
 app.use(express.json()); 
 
+// Importa os modelos para garantir que são carregados
+const Category = require('./models/Category');
+const Product = require('./models/Product');
+const user = require('./models/user');  // Corrigido para 'User' com 'U' maiúsculo
+const Image = require('./models/Image');
+const Option = require('./models/Option');
+const ProductCategory = require('./models/ProductCategory');
+
+// Importa as rotas do usuário
+const userRoutes = require('./routes/userRoutes');
+
+// Configura a rota base
+app.use('/api', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('EAE MUNDÃO'); 
 });
 
-const category = require('./models/Category');
-const product = require('./models/Product');
-const user = require('./models/user');
-const image = require('./models/Image');
-const option = require('./models/Option');
-const productCategory = require('./models/ProductCategory');
-const userRoutes = require('./routes/userRoutes');
-
-
+// Sincroniza o banco de dados e inicia o servidor
 sequelize.sync()
   .then(() => {
     const PORT = process.env.PORT || 3000;
