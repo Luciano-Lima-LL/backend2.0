@@ -1,13 +1,13 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database'); // Ajuste o caminho se necessário
+const sequelize = require('../config/database');  
 
 const Category = sequelize.define('Category', {
-  id: {
+  id:{
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  name: {
+  name:{
     type: DataTypes.STRING,
     allowNull: false,
   },
