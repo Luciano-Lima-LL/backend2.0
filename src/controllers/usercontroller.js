@@ -1,12 +1,10 @@
-
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
 
 const createUser = async (req, res) => {
   const { firstname, surname, email, password, confirmPassword } = req.body;
 
   if (!firstname || !surname || !email || !password || password !== confirmPassword) {
-    return res.status(400).json({ error: 'Dados inválidos' });
+    return res.status(400).json({ error: 'Dados inválidos ou senhas não coincidem' });
   }
 
   try {
@@ -67,7 +65,7 @@ const deleteUser = async (req, res) => {
     }
 
     await user.destroy();
-    return res.status(204).send(); 
+    return res.status(204).send();
   } catch (error) {
     return res.status(500).json({ error: 'Erro ao deletar usuário' });
   }
@@ -79,4 +77,3 @@ module.exports = {
   getUserById,
   deleteUser,
 };
-
